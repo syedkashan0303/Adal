@@ -1,17 +1,18 @@
 ﻿@model Core.CoreClass.UsersDTO
 
 @{
-	ViewData["Title"] = "Create";
+	ViewData["Title"] = "Register";
 }
 
 
-<h1>Create New User</h1>
+<h1 style="text-align:center">Laywer Registration</h1>
 
 <div class="row">
 	<div class="col-md-12">
-		<form asp-action="Create" class="needs-validation" novalidate>
+		<form asp-action="Register" class="needs-validation" novalidate>
 			@Html.HiddenFor(x => x.UserRoleId);
 			@Html.HiddenFor(x => x.Active);
+
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 			<div class="row col-md-12">
@@ -57,18 +58,24 @@
 				</div>
 			</div>
 
-			<div class="row col-md-12">
+			<div class="form-group">
+				<label asp-for="Address" class="control-label">Address:</label>
+				<input asp-for="Address" class="form-control" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+			</div>
 
-				<div class="col-md-6">
-					<label asp-for="Address" class="control-label">Address:</label>
-					<input asp-for="Address" class="form-control" />
-					<span asp-validation-for="Address" class="text-danger"></span>
-				</div>
+			<div class="row col-md-12">
 
 				<div class="col-md-6">
 					<label asp-for="CityId" class="control-label">City:</label>
 					@Html.DropDownListFor(model => model.CityId, new SelectList(Model.CityList, "Value", "Text"), "Select", new { @class = "form-control" })
 					<span asp-validation-for="CityId" class="text-danger"></span>
+				</div>
+
+				<div class="col-md-6">
+					<label asp-for="UserType" class="control-label">User Type:</label>
+					@Html.DropDownListFor(model => model.UserType, new SelectList(Model.LawyerTypeList, "Value", "Text"), "Select", new { @class = "form-control" })
+					<span asp-validation-for="UserType" class="text-danger"></span>
 				</div>
 
 			</div>
@@ -88,18 +95,8 @@
 				</div>
 			</div>
 
-@* 			<div class="form-row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label asp-for="UserRoleId" class="control-label">User Role ID:</label>
-						<input asp-for="UserRoleId" class="form-control" />
-						<span asp-validation-for="UserRoleId" class="text-danger"></span>
-					</div>
-				</div>
-			</div> *@
-
 			<br />
-			
+
 			<div class="row col-md-12">
 
 				<div class="form-group col-md-6">
@@ -110,7 +107,7 @@
 				</div>
 			</div>
 
-			
+
 		</form>
 	</div>
 </div>

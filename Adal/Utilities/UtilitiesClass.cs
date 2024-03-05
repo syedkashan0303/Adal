@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Core.CoreClass;
-using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Adal.Utilities
 {
@@ -18,7 +17,7 @@ namespace Adal.Utilities
 
         public void CreateMap()
         {
-            _config.CreateMapper().ConfigurationProvider.AssertConfigurationIsValid(); // Ensure mappings are valid
+            _config.CreateMapper().ConfigurationProvider.AssertConfigurationIsValid();
         }
 
         public TDestination Map(TSource source)
@@ -26,5 +25,19 @@ namespace Adal.Utilities
             var mapper = _config.CreateMapper();
             return mapper.Map<TSource, TDestination>(source);
         }
+
+        //public void CreateMapWithAutoProperties()
+        //{
+        //    _config = new MapperConfiguration(cfg =>
+        //    {
+        //        var map = cfg.CreateMap<TSource, TDestination>();
+
+        //        // Include all properties from the source object
+        //        foreach (var property in typeof(TSource).GetProperties())
+        //        {
+        //            map.ForMember(property.Name, opt => opt.MapFrom(src => src.GetType().GetProperty(property.Name).GetValue(src)));
+        //        }
+        //    });
+        //}
     }
 }

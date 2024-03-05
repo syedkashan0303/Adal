@@ -4,12 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="mb-4">User List</h1>
+<h1 class="mb-4">Users List</h1>
 
 <div class="row mb-4">
-    <div class="col-md-6">
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
-    </div>
+
 </div>
 
 <div class="table-responsive">
@@ -37,8 +35,11 @@
                     <td>@Html.DisplayFor(modelItem => item.UserRoleName)</td>
                     <td>
                         <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        @if (item.UserRoleId == 2)
+                        {
+                            <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
                     </td>
                 </tr>
             }

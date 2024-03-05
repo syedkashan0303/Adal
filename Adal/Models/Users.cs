@@ -14,8 +14,6 @@ namespace Core.CoreClass
     {
         public Users() 
         {
-            //List<City> cities = new List<City>();
-            CityList = new List<City>();
         }
         public int Id { get; set; }
 
@@ -53,20 +51,11 @@ namespace Core.CoreClass
         [NotMapped]
         public string? ConfirmPassword { get; set; }
 
-
         public int? CityId { get; set; }
         public int? UserRoleId { get; set; }
 
-        [NotMapped]
-        public string? UserRoleName { get; set; }
-
-        [NotMapped]
-        public string? CityName { get; set; }
         public DateTime CreatedOnUTC { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedOnUTC { get; set; } = DateTime.UtcNow;
-
-        [NotMapped]
-        public List<City> CityList { get; set; }
     }
 
 

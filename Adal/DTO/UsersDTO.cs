@@ -1,4 +1,5 @@
 ﻿using Adal.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +16,8 @@ namespace Core.CoreClass
         public UsersDTO()
         {
             //List<City> cities = new List<City>();
-            CityList = new List<City>();
-			LawyerTypeList = new List<LawyerTypesClass>();
+            CityList = new List<SelectListItem>();
+			LawyerTypeList = new List<SelectListItem>();
         }
         public int Id { get; set; }
 
@@ -67,16 +68,7 @@ namespace Core.CoreClass
         public DateTime CreatedOnUTC { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedOnUTC { get; set; } = DateTime.UtcNow;
 
-        [NotMapped]
-        public List<City> CityList { get; set; }
-        public List<LawyerTypesClass> LawyerTypeList { get; set; }
-
-        public class LawyerTypesClass
-        {
-			public int? UserType { get; set; }
-			public string? UserTypeName { get; set; }
-		}
+        public List<SelectListItem> CityList { get; set; }
+        public List<SelectListItem> LawyerTypeList { get; set; }
 	}
-
-
 }
