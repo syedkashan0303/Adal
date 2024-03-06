@@ -57,44 +57,30 @@
                 </div>
             </div>
 
-            <div class="row col-md-12">
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label">Address:</label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
+          
+                <div class="row col-md-12">
+
+                    <div class="col-md-6">
+                        <label asp-for="CityId" class="control-label">City:</label>
+                        @Html.DropDownListFor(model => model.CityId, new SelectList(Model.CityList, "Value", "Text"), "Select", new { @class = "form-control" })
+                        <span asp-validation-for="CityId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Address" class="control-label">Address:</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+@* 
+                    <div class="col-md-6">
+                        <label asp-for="UserType" class="control-label">User Type:</label>
+                        @Html.DropDownListFor(model => model.UserType, new SelectList(Model.LawyerTypeList, "Value", "Text"), "Select", new { @class = "form-control" })
+                        <span asp-validation-for="UserType" class="text-danger"></span>
+                    </div> *@
+
                 </div>
-            </div>
 
-            <div class="row col-md-12">
-
-                <div class="col-md-6">
-                    <label asp-for="CityId" class="control-label">City:</label>
-                    @Html.DropDownListFor(model => model.CityId, new SelectList(Model.CityList, "Value", "Text"), "Select", new { @class = "form-control" })
-                    <span asp-validation-for="CityId" class="text-danger"></span>
-                </div>
-
-                <div class="col-md-6">
-                    <label asp-for="UserType" class="control-label">User Type:</label>
-                    @Html.DropDownListFor(model => model.UserType, new SelectList(Model.LawyerTypeList, "Value", "Text"), "Select", new { @class = "form-control" })
-                    <span asp-validation-for="UserType" class="text-danger"></span>
-                </div>
-
-            </div>
-
-            @* 		<div class="row col-md-12">
-
-            <div class="col-md-6">
-            <label asp-for="Password" class="control-label">Password:</label>
-            <input asp-for="Password" class="form-control" required />
-            <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-6">
-            <label asp-for="ConfirmPassword" class="control-label">Confirm Password:</label>
-            <input asp-for="ConfirmPassword" class="form-control" required />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            </div> *@
             <br></br>
             <div class="row col-md-12">
                 <input type="submit" value="Save" class="btn btn-primary" style="float:right" />

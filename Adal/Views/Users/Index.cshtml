@@ -38,7 +38,7 @@
                         @if (item.UserRoleId == 2)
                         {
                             <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <button class="deleteButton" recordId="@item.Id">DeActive</button>
                         }
                     </td>
                 </tr>
@@ -46,3 +46,34 @@
         </tbody>
     </table>
 </div>
+
+
+<script>
+    var deleteButtons = document.querySelectorAll('.deleteButton');
+    deleteButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var recordId = button.getAttribute('recordId');
+            deleteRecord(recordId);
+        });
+    });
+    function deleteRecord(recordId) {
+        console.log('userId', recordId);
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("DeActive", "Users")",
+            data: { id: recordId },
+            success: function (result) {
+                {
+                    if (result == "Success") {
+                        PNotify.success({
+                            title: 'Record Deleted!',
+                            text: ''
+                        });
+                    }
+                }
+            },
+            error: function (result) { }
+        });
+    };
+
+</script>

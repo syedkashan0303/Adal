@@ -70,7 +70,6 @@ namespace Adal.Controllers
 
 		#region Client Working
 
-		// GET: Users
 		public async Task<IActionResult> ClientList()
 		{
 			var getUsers = await _context.Users.Where(x => x.UserRoleId == 3).ToListAsync();
@@ -105,7 +104,6 @@ namespace Adal.Controllers
 			return View(new List<UsersDTO>());
 		}
 
-		// GET: Users/Details/5
 		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Users == null)
@@ -122,9 +120,8 @@ namespace Adal.Controllers
 
             return View(users);
         }
-
-        // GET: Users/Create
-        public IActionResult Create()
+        
+		public IActionResult Create()
         {
             UsersDTO model = new UsersDTO();
 
@@ -199,6 +196,13 @@ namespace Adal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, UsersDTO users)
         {
+            var user = await _context.Users.FindAsync(id);
+
+			if (user == null)
+			{
+                return NotFound();
+            }
+
             if (id != users.Id)
             {
                 return NotFound();
@@ -208,9 +212,18 @@ namespace Adal.Controllers
             {
                 try
                 {
-					var utilities = new UtilitiesClass<UsersDTO, Users>();
-					var user = utilities.Map(users);
-					_context.Update(user);
+					//var utilities = new UtilitiesClass<UsersDTO, Users>();
+					//var user = utilities.Map(users);
+
+					user.Address = users.Address;
+					user.CNIC = users.CNIC;
+					user.CityId = users.CityId;
+					user.Contact = users.Contact;
+					user.FirstName = users.FirstName;
+					user.LastName = users.LastName;
+					user.DateOfBirth = users.DateOfBirth;
+
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -280,7 +293,6 @@ namespace Adal.Controllers
         }
 
 		#endregion
-
 
 		#region Lawyer 
 
@@ -360,10 +372,9 @@ namespace Adal.Controllers
 		{
 			if (_context.Users == null)
 			{
-				return Problem("Entity set 'DatabaseContext.Users'  is null.");
+				return Json("Error");
 			}
 			var users = await _context.Users.FindAsync(id);
-
 
 			if (users != null)
 			{
@@ -371,15 +382,8 @@ namespace Adal.Controllers
 				_context.Users.Update(users);
 				await _context.SaveChangesAsync();
 			}
-
-			if (users.UserRoleId == 3)
-			{
-				return RedirectToAction(nameof(ClientList));
-			}
-			return RedirectToAction(nameof(LawyerList));
+			return Json("Success");
 		}
-
-
 
 		#endregion
 	}

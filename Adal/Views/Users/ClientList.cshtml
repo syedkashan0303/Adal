@@ -7,9 +7,9 @@
 <h1 class="mb-4">Client List</h1>
 
 <div class="row mb-4">
-	<div class="col-md-6">
+@* 	<div class="col-md-6">
 		<a class="btn btn-primary" asp-action="Create">Create New</a>
-	</div>
+	</div> *@
 </div>
 
 <div class="table-responsive">
@@ -38,10 +38,6 @@
 					<td>
 						<a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
 						<a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-						@* <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
-						@* <button onclick="deleteRecord" recordId="@item.Id">Delete</button> *@
-						<button class="deleteButton" recordId="@item.Id">Delete</button>
-
 					</td>
 				</tr>
 			}
@@ -49,32 +45,19 @@
 	</table>
 </div>
 <script>
-
 	var deleteButtons = document.querySelectorAll('.deleteButton');
-
 	deleteButtons.forEach(function (button) {
 		button.addEventListener('click', function () {
 			var recordId = button.getAttribute('recordId');
-			deleteRecord(recordId); 
+			deleteRecord(recordId);
 		});
 	});
-
 	function deleteRecord(recordId) {
-		// Create JSON request to delete the record with the given ID
-		var request = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				recordId: recordId
-			})
-		};
-
+		console.log('userId', recordId);
 		$.ajax({
 			type: 'POST',
-			url: "@Url.Action("DeletePartExchangeQuoteMapping", "Quote")",
-			data: addAntiForgeryToken({ Id: data_attr }),
+			url: "@Url.Action("DeActive", "Users")",
+			data: { id: recordId },
 			success: function (result) {
 				{
 					if (result == "Success") {
@@ -87,27 +70,6 @@
 			},
 			error: function (result) { }
 		});
+	};
 
-		// // Here you can perform the fetch request to your server
-		// fetch('/Users/DeActive', request)
-		// 	.then(response => {
-		// 		if (!response.ok) {
-		// 			throw new Error('Network response was not ok');
-		// 		}
-		// 		return response.json();
-		// 	})
-		// 	.then(data => {
-		// 		// Handle success response from server
-		// 		console.log('Record deleted successfully:', data);
-		// 		// Optionally, update the UI to reflect the deletion
-		// 		var listItem = document.querySelector('[data-record-id="' + recordId + '"]');
-		// 		if (listItem) {
-		// 			listItem.remove();
-		// 		}
-		// 	})
-		// 	.catch(error => {
-		// 		// Handle error
-		// 		console.error('Error deleting record:', error);
-		// 	});
-	}
 </script>

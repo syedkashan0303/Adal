@@ -1,18 +1,17 @@
 ﻿@model Core.CoreClass.UsersDTO
 
 @{
-	ViewData["Title"] = "Register";
+	ViewData["Title"] = "Lawyer Register";
 }
 
 
-<h1 style="text-align:center">Laywer Registration</h1>
+<h1>Lawyer Registration </h1>
 
 <div class="row">
 	<div class="col-md-12">
-		<form asp-action="Register" class="needs-validation" novalidate>
-			@Html.HiddenFor(x => x.UserRoleId)
-			@Html.HiddenFor(x => x.Active)
-
+		<form asp-action="LawyerRegister" class="needs-validation" novalidate>
+			@Html.HiddenFor(x => x.UserRoleId);
+			@Html.HiddenFor(x => x.Active);
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 			<div class="row col-md-12">
@@ -58,56 +57,54 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label asp-for="Address" class="control-label">Address:</label>
-				<input asp-for="Address" class="form-control" />
-				<span asp-validation-for="Address" class="text-danger"></span>
+			<div class="row col-md-12">
+				<div class="col-md-12">
+					<label asp-for="Address" class="control-label">Address:</label>
+					<input asp-for="Address" class="form-control" />
+					<span asp-validation-for="Address" class="text-danger"></span>
+				</div>
 			</div>
 
 			<div class="row col-md-12">
-
 				<div class="col-md-6">
 					<label asp-for="CityId" class="control-label">City:</label>
 					@Html.DropDownListFor(model => model.CityId, new SelectList(Model.CityList, "Value", "Text"), "Select", new { @class = "form-control" })
 					<span asp-validation-for="CityId" class="text-danger"></span>
 				</div>
-
-				<div class="col-md-6">
-					<label asp-for="UserType" class="control-label">User Type:</label>
-					@Html.DropDownListFor(model => model.UserType, new SelectList(Model.LawyerTypeList, "Value", "Text"), "Select", new { @class = "form-control" })
-					<span asp-validation-for="UserType" class="text-danger"></span>
-				</div>
-
+				
+                <div class="col-md-6">
+                    <label asp-for="UserType" class="control-label">User Type:</label>
+                    @Html.DropDownListFor(model => model.UserType, new SelectList(Model.LawyerTypeList, "Value", "Text"), "Select", new { @class = "form-control" })
+                    <span asp-validation-for="UserType" class="text-danger"></span>
+                </div>
 			</div>
 
 			<div class="row col-md-12">
-
 				<div class="col-md-6">
 					<label asp-for="Password" class="control-label">Password:</label>
-					<input asp-for="Password" class="form-control" required />
+					<input asp-for="Password" type="password" class="form-control" required />
 					<span asp-validation-for="Password" class="text-danger"></span>
 				</div>
 
 				<div class="col-md-6">
 					<label asp-for="ConfirmPassword" class="control-label">Confirm Password:</label>
-					<input asp-for="ConfirmPassword" class="form-control" required />
+					<input asp-for="ConfirmPassword" type="password" class="form-control" required />
 					<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 				</div>
 			</div>
 
 			<br />
-
+			
 			<div class="row col-md-12">
-
 				<div class="form-group col-md-6">
-					<button type="submit" class="btn btn-primary" style="float:right">Create</button>
+					<button type="submit" class="btn btn-primary" style="float:right">Register</button>
 				</div>
 				<div class="form-group col-md-6">
 					<a asp-action="Index" class="btn btn-secondary">Back to List</a>
 				</div>
 			</div>
 
-
+			
 		</form>
 	</div>
 </div>
