@@ -11,10 +11,14 @@ namespace Adal.Controllers
     {
 
         private readonly DatabaseContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly SessionUtilities _sessionUtilities;
 
-        public LoginController(DatabaseContext context)
+        public LoginController(DatabaseContext context, IHttpContextAccessor httpContextAccessor, SessionUtilities sessionUtilities)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _sessionUtilities = sessionUtilities;
         }
         public IActionResult Index()
         {
@@ -37,6 +41,7 @@ namespace Adal.Controllers
             {
                 if (users.Password == Model.Password)
                 {
+                    _sessionUtilities.AddDetailsInSessions(users);
                     return RedirectToAction("Index","Home");
                 }
             }
@@ -44,6 +49,13 @@ namespace Adal.Controllers
             return View(Model);
         }
 
+        public IActionResult Logout()
+        {
+
+            _httpContextAccessor.HttpContext.Session.Clear();
+
+            return RedirectToAction("Login");
+        }
 
         public IActionResult Register()
         {
@@ -86,7 +98,6 @@ namespace Adal.Controllers
 
             return View(Model);
         }
-
 
         public IActionResult LawyerRegister()
         {

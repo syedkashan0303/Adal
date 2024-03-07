@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.CoreClass;
 using System.Linq;
 
 namespace Adal.Utilities
@@ -39,5 +40,25 @@ namespace Adal.Utilities
         //        }
         //    });
         //}
+   
+
+    }
+
+    public class SessionUtilities
+    {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public SessionUtilities(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public void AddDetailsInSessions(Users users)
+        {
+            _httpContextAccessor.HttpContext.Session.SetInt32("Id", users.Id);
+            _httpContextAccessor.HttpContext.Session.SetString("Email", users.Email);
+            _httpContextAccessor.HttpContext.Session.SetString("UserName", users.FirstName +" "+ users.LastName);
+            _httpContextAccessor.HttpContext.Session.SetString("UserRole", (users.UserRoleId == 1 ? "Admin" : users.UserRoleId == 2 ? "Lawyer" :"Client"));
+        }
     }
 }

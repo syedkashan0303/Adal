@@ -21,8 +21,6 @@ namespace Adal.Controllers
             _context = context;
         }
 
-
-
 		// GET: Users
 		public async Task<IActionResult> Index()
 		{
@@ -65,8 +63,6 @@ namespace Adal.Controllers
 
 			return View(new List<UsersDTO>());
 		}
-
-
 
 		#region Client Working
 
